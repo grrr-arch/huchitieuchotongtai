@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Hũ Chi Tiêu Thông Minh </title>
+    <title>Quản Lý & Phân Bổ Hũ Chi Tiêu </title>
     <style>
         :root {
             --primary: #ff758f;
@@ -28,8 +28,8 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding: 16px;
             color: var(--text-color);
         }
 
@@ -39,11 +39,12 @@
             border-radius: var(--border-radius);
             box-shadow: 0 15px 35px rgba(238, 156, 167, 0.3);
             width: 100%;
-            max-width: 900px;
-            padding: 28px;
+            max-width: 800px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
+            margin: 0 auto;
         }
 
         .header {
@@ -52,13 +53,18 @@
 
         .header h1 {
             color: #c9184a;
-            font-size: 1.8rem;
-            margin-bottom: 6px;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            color: #805b61;
+            font-size: 0.85rem;
         }
 
         .extractor-card {
             background: #fff;
-            padding: 16px;
+            padding: 14px;
             border-radius: 12px;
             border: 2px dashed var(--primary);
             display: flex;
@@ -69,40 +75,46 @@
         textarea {
             width: 100%;
             height: 60px;
-            padding: 10px;
+            padding: 8px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             resize: none;
             outline: none;
         }
 
         .income-card {
             background: #fff;
-            padding: 16px;
+            padding: 14px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
         .income-card input {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             color: #c9184a;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            max-width: 200px;
         }
 
         .jars-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .jars-header h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #c9184a;
         }
 
@@ -110,47 +122,67 @@
             background: #2a9d8f;
             color: white;
             border: none;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 0.85rem;
         }
 
         .jars-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .jar-item {
             background: #fff;
-            padding: 14px;
+            padding: 12px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            display: grid;
-            grid-template-columns: 2fr 1.5fr 2fr 1.5fr auto;
-            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
             align-items: center;
         }
 
-        @media (max-width: 768px) {
-            .jar-item {
-                grid-template-columns: 1fr 1fr;
-            }
+        .jar-item input[type="text"] {
+            flex: 2;
+            min-width: 130px;
+        }
+
+        .jar-item select {
+            flex: 1.5;
+            min-width: 120px;
+        }
+
+        .jar-item input[type="number"] {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .calculated-amount {
+            flex: 1.5;
+            min-width: 100px;
+            font-weight: bold;
+            color: #c9184a;
+            text-align: right;
+            font-size: 0.9rem;
         }
 
         input, select {
-            padding: 8px 10px;
+            padding: 8px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             outline: none;
+            font-size: 0.85rem;
         }
 
         .btn-delete {
             background: #ff4d6d;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 6px;
             cursor: pointer;
         }
@@ -159,28 +191,28 @@
             background: var(--accent-pink);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 16px;
+            padding: 12px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
             text-align: center;
         }
 
         .summary-item {
             background: #fff;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
 
         .summary-item .title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #a44a5d;
             font-weight: 600;
         }
 
         .summary-item .val {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #c9184a;
             margin-top: 4px;
@@ -188,13 +220,13 @@
 
         .btn-calc {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
         }
 
@@ -211,20 +243,17 @@
         <p>Cấu hình khoản cố định hoặc để AI đề xuất tỷ lệ cho từng hũ</p>
     </div>
 
-    <!-- Ô Trích Xuất Thông Tin -->
     <div class="extractor-card">
-        <label>✨ Trích xuất nhanh từ tin nhắn/hóa đơn:</label>
+        <label><strong>✨ Trích xuất nhanh từ tin nhắn/hóa đơn:</strong></label>
         <textarea id="rawText" placeholder="Dán văn bản tin nhắn hoặc hóa đơn vào đây (Ví dụ: 'Nhan luong 20.000.000d' hoặc 'Tien nha 4.000.000')..."></textarea>
         <button class="btn-calc" onclick="extractInformation()">🔍 Trích Xuất Thông Tin</button>
     </div>
 
-    <!-- Ô Thu Nhập -->
     <div class="income-card">
         <label for="income"><strong>💵 Thu Nhập Hàng Tháng (VNĐ):</strong></label>
         <input type="number" id="income" value="20000000" oninput="calculateJars()">
     </div>
 
-    <!-- Danh Sách Hũ Chi Tiêu -->
     <div class="jars-header">
         <h2>🏷️ Danh Sách Hũ Chi Tiêu</h2>
         <button class="btn-add" onclick="addCustomJar()">+ Thêm Hũ Chi Tiêu</button>
@@ -232,7 +261,6 @@
 
     <div class="jars-container" id="jarsContainer"></div>
 
-    <!-- Bảng Tổng Quan -->
     <div class="summary-box">
         <div class="summary-item">
             <div class="title">TỔNG THU NHẬP</div>
@@ -250,7 +278,6 @@
 </div>
 
 <script>
-    // Danh sách các hũ mặc định
     let defaultJars = [
         { name: "Tiền nhà & Hóa đơn", mode: "fixed", val: 4000000 },
         { name: "Tiền ăn uống cố định", mode: "fixed", val: 3000000 },
@@ -263,7 +290,6 @@
         return new Intl.NumberFormat('vi-VN').format(Math.round(amount)) + ' VNĐ';
     }
 
-    // Khởi tạo giao diện các hũ
     function renderJars() {
         const container = document.getElementById('jarsContainer');
         container.innerHTML = '';
@@ -311,7 +337,6 @@
         const income = parseFloat(document.getElementById('income').value) || 0;
         let totalFixed = 0;
 
-        // Bước 1: Bắt buộc trừ hết các hũ Cố Định trước
         defaultJars.forEach(jar => {
             if (jar.mode === 'fixed') {
                 totalFixed += jar.val;
@@ -321,7 +346,6 @@
         const remainingAfterFixed = Math.max(0, income - totalFixed);
         let totalAllocated = totalFixed;
 
-        // Bước 2: Tính toán các hũ AI Đề Xuất (%) dựa trên số tiền còn dư lại
         defaultJars.forEach((jar, index) => {
             let finalAmount = 0;
             if (jar.mode === 'fixed') {
@@ -337,17 +361,15 @@
             }
         });
 
-        // Cập nhật bảng tổng quan
         document.getElementById('displayIncome').innerText = formatVND(income);
         document.getElementById('displayAllocated').innerText = formatVND(totalAllocated);
-
+        
         const remainingVal = income - totalAllocated;
         const remainingElem = document.getElementById('displayRemaining');
         remainingElem.innerText = formatVND(remainingVal);
         remainingElem.style.color = remainingVal < 0 ? '#ff3355' : '#c9184a';
     }
 
-    // Trích xuất thông tin tự động
     function extractInformation() {
         const text = document.getElementById('rawText').value.toLowerCase();
         if (!text.trim()) {
